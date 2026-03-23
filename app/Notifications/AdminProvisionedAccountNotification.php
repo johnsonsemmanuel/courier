@@ -11,8 +11,7 @@ class AdminProvisionedAccountNotification extends Notification
     use Queueable;
 
     public function __construct(
-        public string $plainPassword,
-        public bool $emailMarkedVerified
+        public string $plainPassword
     ) {}
 
     /**
@@ -28,15 +27,8 @@ class AdminProvisionedAccountNotification extends Notification
         $mail = (new MailMessage)
             ->subject('Your Courier Savings Bank account')
             ->greeting('Hello ' . $notifiable->name . ',')
-            ->line('An administrator has created an online banking account for you.');
-
-        if ($this->emailMarkedVerified) {
-            $mail->line('Your email is already verified. You can sign in right away using the credentials below.');
-        } else {
-            $mail->line('Please check your inbox for a separate email to verify your address. After verification, sign in with the password below.');
-        }
-
-        return $mail
+            ->line('An administrator has created an online banking account for you.')
+            ->line('You can sign in right away using the credentials below.')
             ->line('**Login email:** ' . $notifiable->email)
             ->line('**Temporary password:** ' . $this->plainPassword)
             ->action('Sign in', url(route('login')))

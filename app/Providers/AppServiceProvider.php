@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Notifications\WelcomeNotification;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -34,19 +31,6 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.force_https') || str_starts_with((string) config('app.url'), 'https://')) {
             URL::forceScheme('https');
         }
-
-        // Welcome email with account details only after email is verified
-        Event::listen(Verified::class, function (Verified $event): void {
-            $user = $event->user;
-            $account = $user->accounts()->first();
-            if ($account) {
-                try {
-                    $user->notify(new WelcomeNotification($user, $account));
-                } catch (\Throwable $e) {
-                    report($e);
-                }
-            }
-        });
 
         Gate::policy(Beneficiary::class, BeneficiaryPolicy::class);
         Gate::policy(BillPayee::class, BillPayeePolicy::class);

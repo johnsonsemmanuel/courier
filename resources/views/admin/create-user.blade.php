@@ -80,13 +80,6 @@
 
         <div class="space-y-2">
             <label class="flex items-center gap-2 cursor-pointer">
-                <input type="hidden" name="mark_email_verified" value="0">
-                <input type="checkbox" name="mark_email_verified" value="1" id="mark_email_verified"
-                       class="rounded border-gray-300 text-primary focus:ring-primary"
-                       @checked(old('mark_email_verified', '1') === '1')>
-                <span class="text-xs text-gray-800">Mark email as verified (recommended — user can sign in immediately)</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
                 <input type="hidden" name="send_welcome_email" value="0">
                 <input type="checkbox" name="send_welcome_email" value="1" id="send_welcome_email"
                        class="rounded border-gray-300 text-primary focus:ring-primary"

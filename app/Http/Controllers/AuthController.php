@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Account;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,15 +45,9 @@ class AuthController extends Controller
             'status' => 'active',
         ]);
 
-        // Sends Laravel's verification email (see User implements MustVerifyEmail)
-        event(new Registered($user));
-
         Auth::login($user);
-
-        return redirect()->route('verification.notice')->with(
-            'success',
-            'We sent a verification link to your email. Please verify your address before using your account.'
-        );
+        
+        return redirect()->route('dashboard')->with('success', 'Account created successfully. Welcome!');
     }
 
     public function showLogin()

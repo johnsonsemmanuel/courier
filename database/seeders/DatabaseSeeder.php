@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'address' => '123 Main Street, New York, NY 10001',
             'is_admin' => false,
         ]);
-        $user1->markEmailAsVerified();
+        $user1->update(['email_verified_at' => now()]);
 
         $account1 = Account::create([
             'user_id' => $user1->id,
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
             'address' => '456 Oak Avenue, Los Angeles, CA 90001',
             'is_admin' => false,
         ]);
-        $user2->markEmailAsVerified();
+        $user2->update(['email_verified_at' => now()]);
 
         $account2 = Account::create([
             'user_id' => $user2->id,
@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
             'address' => '789 Pine Street, Chicago, IL 60601',
             'is_admin' => false,
         ]);
-        $user3->markEmailAsVerified();
+        $user3->update(['email_verified_at' => now()]);
 
         $account3 = Account::create([
             'user_id' => $user3->id,
@@ -103,7 +103,7 @@ class DatabaseSeeder extends Seeder
             'address' => '321 Elm Street, Houston, TX 77001',
             'is_admin' => false,
         ]);
-        $user4->markEmailAsVerified();
+        $user4->update(['email_verified_at' => now()]);
 
         $account4 = Account::create([
             'user_id' => $user4->id,
@@ -125,7 +125,7 @@ class DatabaseSeeder extends Seeder
             'address' => '654 Maple Avenue, Miami, FL 33101',
             'is_admin' => false,
         ]);
-        $user5->markEmailAsVerified();
+        $user5->update(['email_verified_at' => now()]);
 
         $account5 = Account::create([
             'user_id' => $user5->id,
@@ -154,7 +154,7 @@ class DatabaseSeeder extends Seeder
             'address' => '987 Cedar Lane, Boston, MA 02101',
             'is_admin' => false,
         ]);
-        $user6->markEmailAsVerified();
+        $user6->update(['email_verified_at' => now()]);
 
         $account6 = Account::create([
             'user_id' => $user6->id,
@@ -184,7 +184,7 @@ class DatabaseSeeder extends Seeder
             'address' => '100 Admin Street, Washington, DC 20001',
             'is_admin' => true,
         ]);
-        $admin->markEmailAsVerified();
+        $admin->update(['email_verified_at' => now()]);
 
         Account::create([
             'user_id' => $admin->id,

@@ -62,7 +62,6 @@ class AdminController extends Controller
             'phone' => 'required|string|max:255',
             'address' => 'required|string',
             'is_admin' => 'nullable|boolean',
-            'mark_email_verified' => 'nullable|boolean',
             'initial_balance' => 'nullable|numeric|min:0',
             'send_welcome_email' => 'nullable|boolean',
         ];
@@ -74,10 +73,9 @@ class AdminController extends Controller
         $validated = $request->validate($rules);
 
         $plainPassword = $autoPassword ? Str::password(12) : $request->string('password')->toString();
-        $markVerified = $request->boolean('mark_email_verified');
         $sendWelcome = $request->boolean('send_welcome_email');
 
-        $user = DB::transaction(function () use ($request, $validated, $plainPassword, $markVerified) {
+        $user = DB::transaction(function () use ($request, $validated, $plainPassword) {
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -110,18 +108,12 @@ class AdminController extends Controller
                 ]);
             }
 
-            if ($markVerified) {
-                $user->markEmailAsVerified();
-            } else {
-                $user->sendEmailVerificationNotification();
-            }
-
             return $user;
         });
 
         if ($sendWelcome) {
             try {
-                $user->notify(new AdminProvisionedAccountNotification($plainPassword, $markVerified));
+                $user->notify(new AdminProvisionedAccountNotification($plainPassword));
             } catch (\Throwable $e) {
                 report($e);
 

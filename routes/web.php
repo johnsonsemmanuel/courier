@@ -4,8 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,35 +35,8 @@ Route::post('/forgot-password', [App\Http\Controllers\PasswordResetController::c
 Route::get('/reset-password/{token}', [App\Http\Controllers\PasswordResetController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [App\Http\Controllers\PasswordResetController::class, 'reset'])->name('password.update');
 
-// Email verification (logged-in users may be unverified)
-Route::middleware('auth')->group(function () {
-    Route::get('/email/verify', function () {
-        if (auth()->user()->hasVerifiedEmail()) {
-            return redirect()->route('dashboard');
-        }
-
-        return view('auth.verify-email');
-    })->name('verification.notice');
-
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-
-        return redirect()->route('dashboard')->with('success', 'Your email has been verified. Welcome!');
-    })->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-
-    Route::post('/email/verification-notification', function (Request $request) {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->route('dashboard');
-        }
-
-        $request->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
-    })->middleware('throttle:6,1')->name('verification.send');
-});
-
-// Protected routes (email must be verified)
-Route::middleware(['auth', 'verified'])->group(function () {
+// Protected routes (login required only)
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // Profile
