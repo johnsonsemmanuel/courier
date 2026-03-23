@@ -1,0 +1,100 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    COURIER SAVINGS BANK                                    ║
+║                   CPANEL DEPLOYMENT - QUICK START                          ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📦 WHAT YOU HAVE:
+─────────────────
+✓ courier-savings-bank-deployment.zip (32MB) - Complete application
+✓ database_mysql_fixed.sql (fixed) - Database schema + demo/admin users
+✓ CPANEL_DEPLOYMENT_GUIDE.md - Detailed instructions
+✓ EMAIL_SETUP_GUIDE.md - Email configuration
+✓ DEPLOYMENT_PACKAGE_README.txt - Full documentation
+✓ DEPLOYMENT_FILES_SUMMARY.txt - File listing
+
+🚀 5-STEP DEPLOYMENT:
+─────────────────────
+
+1️⃣  EXTRACT & UPLOAD
+   • Extract courier-savings-bank-deployment.zip on your computer
+   • Upload ALL files (except public/) → public_html/banking-app/
+   • Upload public/ contents → public_html/
+
+2️⃣  CREATE DATABASE
+   • cPanel → MySQL Databases → Create database
+   • phpMyAdmin → Import database_mysql_fixed.sql
+
+3️⃣  CONFIGURE .ENV
+   • Create .env in public_html/banking-app/
+   • Copy from .env.example
+   • Update: APP_KEY, APP_URL, DB_*, MAIL_*
+
+4️⃣  UPDATE FILES
+   • Edit public_html/index.php (update paths)
+   • Create public_html/.htaccess (Laravel routing)
+   • Create public_html/banking-app/.htaccess (protection)
+   • Set permissions: storage/ and bootstrap/cache/ → 775
+
+5️⃣  TEST & SECURE
+   • Visit https://yourdomain.com
+   • Register test account
+   • Login as admin (admin@bankapp.com / password)
+   • CHANGE ADMIN PASSWORD IMMEDIATELY!
+
+🔐 DEFAULT ADMIN:
+─────────────────
+Email: admin@bankapp.com
+Password: password
+⚠️  CHANGE THIS IMMEDIATELY!
+
+📧 EMAIL SETUP:
+───────────────
+• Create email: noreply@yourdomain.com in cPanel
+• Update .env:
+  MAIL_HOST=mail.yourdomain.com
+  MAIL_USERNAME=noreply@yourdomain.com
+  MAIL_PASSWORD=your_password
+  MAIL_FROM_ADDRESS=noreply@yourdomain.com
+
+⚙️  SYSTEM REQUIREMENTS:
+────────────────────────
+• PHP 8.1+ (8.3 recommended)
+• MySQL 5.7+
+• cPanel hosting
+• SSL certificate
+• Email account
+
+✨ FEATURES:
+────────────
+Customer:
+• Deposits & Withdrawals
+• Send Money
+• Beneficiaries
+• Recurring Transfers
+• Bill Payments
+• Virtual Cards
+• Statements (PDF)
+• Email Notifications
+
+Admin:
+• User Management
+• Account Freeze/Unfreeze
+• Tax Controls
+• Transaction Monitoring
+• System Statistics
+
+🛠️  TROUBLESHOOTING:
+────────────────────
+500 Error → Check .env and permissions
+Blank Page → Check index.php paths
+No CSS → Check public/build/ uploaded
+DB Error → Check database credentials
+No Email → Check MAIL_* settings
+
+📚 FULL DOCUMENTATION:
+──────────────────────
+Read CPANEL_DEPLOYMENT_GUIDE.md for complete step-by-step instructions!
+
+═══════════════════════════════════════════════════════════════════════════
+
+Need help? Check the included documentation files!
