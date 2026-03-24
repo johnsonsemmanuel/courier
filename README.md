@@ -174,6 +174,15 @@ npm run build
 php artisan test
 ```
 
+## Railway Deployment
+
+This project can run on Railway as a single Laravel web service (backend + Blade frontend).
+
+- `railway.toml` is included with build and start commands.
+- Use `APP_URL=https://couriersavings.up.railway.app`.
+- Keep `APP_DEBUG=false` and `APP_ENV=production`.
+- Do not hardcode port `80`; Railway provides the runtime port via `$PORT`.
+
 ## Technology Stack
 
 - **Backend**: Laravel 11

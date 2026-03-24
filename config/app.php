@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'force_https' => (bool) env('FORCE_HTTPS', false),
+    'force_https' => (bool) env('APP_FORCE_HTTPS', env('FORCE_HTTPS', false)),
 
     /*
     |--------------------------------------------------------------------------

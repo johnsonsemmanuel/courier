@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // HTTPS: certificate is installed in hosting (cPanel); align Laravel URLs & cookies.
-        if (config('app.force_https') || str_starts_with((string) config('app.url'), 'https://')) {
+        // Force HTTPS only when explicitly enabled by environment config.
+        if (config('app.force_https')) {
             URL::forceScheme('https');
         }
 
