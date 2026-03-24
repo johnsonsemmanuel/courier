@@ -15,7 +15,15 @@ class Beneficiary extends Model
         'nickname',
         'email',
         'phone',
+        'is_favorite',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_favorite' => 'boolean',
+        ];
+    }
 
     public function user(): BelongsTo
     {
