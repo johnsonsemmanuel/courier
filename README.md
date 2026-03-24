@@ -183,6 +183,16 @@ This project can run on Railway as a single Laravel web service (backend + Blade
 - Keep `APP_DEBUG=false` and `APP_ENV=production`.
 - Do not hardcode port `80`; Railway provides the runtime port via `$PORT`.
 
+### Demo admin and test users (production DB)
+
+After MySQL is connected, open a shell on the **app** service and run once:
+
+```bash
+php artisan demo:install --fresh --force
+```
+
+This runs `migrate:fresh --seed` and creates the accounts from `DatabaseSeeder` (admin `admin@bankapp.com` / `password`, plus other demo users — see seeder). **This wipes all existing data** in the database.
+
 ## Technology Stack
 
 - **Backend**: Laravel 11
